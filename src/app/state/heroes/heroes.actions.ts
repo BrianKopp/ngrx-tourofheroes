@@ -1,5 +1,5 @@
-import { Hero } from './../../../models/hero';
-import { createActionType } from "../../shared/utils";
+import { Hero } from '../../models/hero';
+import { createActionType } from "../shared/utils";
 import { Action } from "@ngrx/store";
 
 export const SELECT_HERO = createActionType('SELECT_HERO');
@@ -22,6 +22,7 @@ export class SelectHero implements Action {
 
 export class LoadHero implements Action {
     readonly type = LOAD_HERO;
+    constructor(public payload: {id: number}){}
 }
 export class LoadHeroSuccess implements Action {
     readonly type = LOAD_HERO_SUCCESS;

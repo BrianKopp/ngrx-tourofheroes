@@ -1,19 +1,24 @@
-import { CustomSerializer } from './shared/utils';
-import { AppEffects } from './app.effects';
 import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { routerReducer, StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
+import {StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 
+import { appMetaReducers, appReducer } from './app.reducer';
+import { CustomSerializer } from './shared/utils';
+import { AppEffects } from './app.effects';
+import * as fromHeroes from './heroes/index';
 import { environment } from '../../environments/environment';
 
 @NgModule({
   imports: [
     CommonModule,
-    StoreModule.forRoot({routerReducer: routerReducer}),
+    StoreModule.forRoot(appReducer, {
+      metaReducers: appMetaReducers
+    }),
+    StoreModule.forFeature('heroes', fromHeroes.reducers),
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([
       AppEffects
