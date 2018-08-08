@@ -1,9 +1,12 @@
+import { CustomSerializer } from './shared/utils';
+import { AppEffects } from './app.effects';
 import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { routerReducer, StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 
 import { environment } from '../../environments/environment';
 
@@ -12,6 +15,9 @@ import { environment } from '../../environments/environment';
     CommonModule,
     StoreModule.forRoot({routerReducer: routerReducer}),
     StoreRouterConnectingModule.forRoot(),
+    EffectsModule.forRoot([
+      AppEffects
+    ]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   declarations: []
@@ -25,7 +31,12 @@ export class StateModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: StateModule,
-      providers: []
+      providers: [
+        {
+          provide: RouterStateSerializer,
+          useClass: CustomSerializer
+        }
+      ]
     }
   }
 }
