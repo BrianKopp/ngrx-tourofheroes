@@ -11,6 +11,7 @@ import { CustomSerializer } from './shared/utils';
 import { AppEffects } from './app.effects';
 import * as fromHeroes from './heroes/index';
 import { environment } from '../../environments/environment';
+import { HeroesEffects } from './heroes/heroes.effects';
 
 @NgModule({
   imports: [
@@ -22,6 +23,9 @@ import { environment } from '../../environments/environment';
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([
       AppEffects
+    ]),
+    EffectsModule.forFeature([
+      HeroesEffects
     ]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
