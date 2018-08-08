@@ -1,3 +1,4 @@
+import { StateModule } from './state/state.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -29,7 +30,8 @@ import { InMemoryDataService } from './services/in-memory-data.service';
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, {dataEncapsulation: false}
-    )
+    ),
+    StateModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
