@@ -1,8 +1,10 @@
-import { LoadHeroes } from './../../state/heroes/heroes.actions';
-import { Observable } from 'rxjs';
-import { Hero } from '../../models/hero';
 import { Component, OnInit } from '@angular/core';
+
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+
+import { LoadHeroes } from './../../state/heroes/heroes.actions';
+import { Hero } from '../../models/hero';
 import { HeroesState, getAllHeroes } from '../../state/heroes';
 
 @Component({
